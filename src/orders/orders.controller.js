@@ -19,7 +19,6 @@ function orderExists(request, response, next) {
   }
 }
 
-// Assign to data req.body.data, defaulting to {}, then extract deliverTo from data.  Return 400 if `deliverTo` is nonexistent or empty.
 function validateDeliverTo(request, response, next) {
   const { data: { deliverTo } = {} } = request.body;
   if (!deliverTo || deliverTo === "") {
@@ -29,7 +28,6 @@ function validateDeliverTo(request, response, next) {
   }
 }
 
-// ^ Just as with previous middleware `validateDeliverTo()`, verify existence and non-emptiness of property
 function validateMobileNumber(req, res, next) {
   const { data: { mobileNumber } = {} } = req.body;
   if (!mobileNumber || mobileNumber === "") {
@@ -117,7 +115,7 @@ function validateOrderDelivered(request, response, next) {
 function create(request, response) {
   const { data: { deliverTo, mobileNumber, dishes } = {} } = request.body;
   const newOrder = {
-    id: nextId(), // here use imported function to generate random ID
+    id: nextId(), 
     deliverTo,
     mobileNumber,
     dishes,
@@ -136,7 +134,7 @@ function read(request, response) {
 }
 
 function update(request, response) {
-  const order = response.locals.order; // The existing order found by the orderExists middleware
+  const order = response.locals.order; 
   const { data: { deliverTo, mobileNumber, dishes, status } = {} } =
     request.body;
 
